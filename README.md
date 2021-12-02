@@ -1,2 +1,3 @@
 # turbScalarTransportSimpleFoam
 This is a combination of two solvers i.e. scalarTransportFoam and simpleFoam for the turbulent transport of the scalars. The code developed is used for a passive transport of the pollutants such as CO, COx, NOx, etc . Hence, the solver aims to model the pollutant dispersion phenomenon using CFD techniques in opensource software OpenFOAM. 
+Four sources of the passive scalar are added in the leeward side of the cubical building. These represent the source of the pollutant moving at velocity of 0.024m/s. Turbulent Schmidt number(Sct) and molecular diffusivity(Dt) terms can be adjusted via /test_case/constant/transportProperties/. Hence the solver is developed to compare the experimental results from CEDVAL with the CFD simulation. 
