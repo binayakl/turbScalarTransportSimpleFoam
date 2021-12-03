@@ -14,7 +14,7 @@ FoamFile
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-application     turbScalarTransportSimpleFoam;
+application     turbScalarTransportSimpleFoam ;
 
 startFrom       latestTime;
 
@@ -22,13 +22,13 @@ startTime       0;
 
 stopAt          endTime;
 
-endTime         5000;
+endTime         2000;
 
 deltaT          1;
 
-writeControl    adjustableRunTime;
+writeControl    timeStep;
 
-writeInterval   500;
+writeInterval   100;
 
 purgeWrite      0;
 
@@ -61,49 +61,8 @@ runTimeModifiable true;
 
       fvOptions
       {
-        tSource1
-        {
-         type        scalarCodedSource;
-         name        sourceTime;
 
-         scalarCodedSourceCoeffs
-         {
-           selectionMode   cellSet;
-            cellSet        selectedCells;
-           volumeMode      specific;
-           fields          (T);
-           name            sourceName;
-           codeInclude
-           #{
-             #include "fvCFD.H"
-             #include "fvc.H"
-           #};
-           codeCorrect
-           #{
-           #};
-           codeAddSup
-           #{
-             const scalarField& V = mesh_.V();
-             //const vectorField& C = mesh_.C();
-             const volVectorField& U = mesh().lookupObject<volVectorField>("U");
-             //const volScalarField& Ux = U.component(0);
-             //const volScalarField& Uy = U.component(1);
-             //const volScalarField& Uz = U.component(2);
-             
-             scalarField& source = eqn.source();
-             source = 0.024*Foam::mag(U)*V;
-
-            
-           #};
-           codeConstrain
-           #{
-             Pout<< "**codeConstrain**"<< endl;
-           #};
-         }
-       }
-
-
-        tSource2
+        tSource
         {
          type        scalarFixedValueConstraint;
          enabled     true;
@@ -117,9 +76,26 @@ runTimeModifiable true;
            fieldValues
            {
              T             1;
+            
            }
          }
        }
+        unitySource
+            {
+                type            scalarSemiImplicitSource;
+                enabled         true;
+
+                scalarSemiImplicitSourceCoeffs
+                {
+                    selectionMode   cellSet;
+                    cellSet        selectedCells;
+                    volumeMode      specific;
+                    injectionRateSuSp
+                    {
+                        T           (0.024 0);
+                    }
+                }
+            }
 
 
       }
@@ -128,6 +104,5 @@ runTimeModifiable true;
     }
 
 }
-
 
 // ************************************************************************* //

@@ -33,9 +33,9 @@ divSchemes
 {
     default         none;
 
-    div(phi,U)      Gauss upwind;
-div(phi,T)        Gauss upwind;
-    turbulence      bounded Gauss limitedLinear 1;
+    div(phi,U)      bounded Gauss upwind;
+div(phi,T)        bounded Gauss upwind;
+    turbulence     bounded Gauss upwind;
     div(phi,k)      $turbulence;
     div(phi,omega) $turbulence;
 

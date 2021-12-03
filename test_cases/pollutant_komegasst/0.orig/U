@@ -26,6 +26,8 @@ boundaryField
     {
          type            atmBoundaryLayerInletVelocity;
          #include        "include/ABLConditions"
+        value           uniform (0 0 0);
+
 
        
     }

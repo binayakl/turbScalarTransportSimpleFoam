@@ -18,7 +18,7 @@ FoamFile
 
 castellatedMesh on;
 snap            on;
-addLayers       off;
+addLayers       on;
 
 geometry
 {
@@ -39,7 +39,7 @@ geometry
     {
         type box;
          min (140 -160 0.0); 
-         max (900  160  140);
+         max (1000  160  140);
     }
 }
 
@@ -64,13 +64,13 @@ castellatedMeshControls
         refinementBox
         {
             mode inside;
-            levels ((1E15 3));
+            levels ((1E15 4));
         }
 
           refinementWake
         {
             mode inside;
-            levels ((1E15 2));
+            levels ((1E15 3));
         }
     }
 

@@ -21,7 +21,7 @@ backgroundMesh
     yMin   -500; // L = 280
     yMax   500;
     zMin     0;
-    zMax   625;
+    zMax   660;
     xCells  25;
     yCells  20;
     zCells  10;
