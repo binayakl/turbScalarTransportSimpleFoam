@@ -1,0 +1,70 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  3.0.x                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      fvSchemes;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+ddtSchemes
+{
+    //default 	    backward;
+    default         steadyState;
+}
+
+gradSchemes
+{
+    default         Gauss linear;
+
+    //default 	    leastSquares;
+    //default 	    cellMDLimited Gauss linear 0.5;
+    //default 	    cellMDLimited leastSquares 0.5;
+
+    //grad(U)         cellLimited Gauss linear 1;
+
+    grad(U)         cellLimited Gauss linear 0.5;
+
+    //grad(p)         cellLimited Gauss linear 0.5;
+
+}
+
+divSchemes
+{
+    default         none;
+
+    //div(phi,U)       Gauss LUST unlimitedGrad(U);
+    //div(phi,U)       Gauss linearUpwind unlimitedGrad(U);
+    div(phi,U)      bounded Gauss linearUpwind limited;
+div(phi,T)        bounded Gauss linearUpwind limited;
+    turbulence      bounded Gauss limitedLinear 1;
+    div(phi,k)      $turbulence;
+    
+    div(phi,epsilon) $turbulence;
+
+    div((nuEff*dev2(T(grad(U))))) Gauss linear;
+}
+
+laplacianSchemes
+{
+    default         Gauss linear limited 1;
+}
+
+interpolationSchemes
+{
+    default         linear;
+}
+
+snGradSchemes
+{
+    default         limited 1;
+}
+
+// ************************************************************************* //
