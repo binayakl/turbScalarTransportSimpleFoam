@@ -1,0 +1,83 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2012                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      binary;
+    class       polyBoundaryMesh;
+    arch        "LSB;label=32;scalar=64";
+    location    "constant/domain/polyMesh";
+    object      boundary;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+8
+(
+    inlet
+    {
+        type            patch;
+        nFaces          510;
+        startFace       1227870;
+    }
+    outlet
+    {
+        type            patch;
+        nFaces          511;
+        startFace       1228380;
+    }
+    symmetry
+    {
+        type            symmetry;
+        inGroups        1(symmetry);
+        nFaces          1707;
+        startFace       1228891;
+    }
+    ground
+    {
+        type            wall;
+        inGroups        1(wall);
+        nFaces          11669;
+        startFace       1230598;
+    }
+    building
+    {
+        type            wall;
+        inGroups        1(wall);
+        nFaces          3308;
+        startFace       1242267;
+    }
+    atmosphere
+    {
+        type            wall;
+        inGroups        1(wall);
+        nFaces          1198;
+        startFace       1245575;
+    }
+    domain_to_source1:7735
+    {
+        type            mappedWall;
+        inGroups        1(wall);
+        nFaces          4516;
+        startFace       1246773;
+        sampleMode      nearestPatchFace;
+        sampleRegion    source1:7735;
+        samplePatch     source1:7735_to_domain;
+    }
+    domain_to_source2:7738
+    {
+        type            mappedWall;
+        inGroups        1(wall);
+        nFaces          4511;
+        startFace       1251289;
+        sampleMode      nearestPatchFace;
+        sampleRegion    source2:7738;
+        samplePatch     source2:7738_to_domain;
+    }
+)
+
+// ************************************************************************* //
